@@ -1,8 +1,9 @@
 import * as readline from "readline";
 
-import { cat, add, rn, cp, mv, rm } from "./src/operation.js";
+import { cat, add, rn, cp, mv, remove } from "./src/operation.js";
 import { hash } from "./src/hash.js";
 import { getOs } from "./src/os.js";
+import { compress, decompress } from "./src/zip.js";
 
 import { goUp, goDown } from "./src/navigation.js";
 import { list } from "./src/list.js";
@@ -48,7 +49,7 @@ rl.on("line", async (command) => {
       mv();
       break;
     case "rm":
-      rm();
+      remove();
       break;
     case "hash":
       hash();
