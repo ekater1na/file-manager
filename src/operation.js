@@ -1,6 +1,6 @@
-import { readdir } from "fs/promises";
-import { getDir } from "./../utils/getDir.js";
+
 import { rm, readFile } from "fs/promises";
+import { rename as renameFile } from "fs/promises";
 
 import { writeFile } from "fs/promises";
 import { getPathFromFiles } from "./../utils/getPathFromFiles.js";
@@ -9,7 +9,6 @@ import { errOperation } from "./../utils/showError.js";
 
 export const cat = async () => {
   const path = getPathFromFiles(import.meta.url, "content.txt");
-  console.log("in progress", path);
 
   try {
     const data = await readFile(path, "utf8");
@@ -33,7 +32,15 @@ export const add = async () => {
 };
 
 export const rn = async () => {
-  console.log("in progress");
+  const name = getPathFromFiles(import.meta.url, "bed.txt");
+  const newName = getPathFromFiles(import.meta.url, "nice.md");
+
+  try {
+    await renameFile(name, newName);
+  } catch (err) {
+    console.error(errOperation);
+    process.exitCode = 1;
+  }
 };
 
 export const cp = async () => {

@@ -4,7 +4,6 @@ import { getPathFromFiles } from "./../utils/getPathFromFiles.js";
 import { errOperation } from "./../utils/showError.js";
 
 export const hash = () => {
-  console.log("in progress");
   const path = getPathFromFiles(import.meta.url, "fileToCalculateHashFor.txt");
 
   try {
