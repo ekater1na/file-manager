@@ -1,6 +1,8 @@
-
-import { rm, readFile } from "fs/promises";
+import { rm } from "fs/promises";
 import { rename as renameFile } from "fs/promises";
+
+import { createReadStream } from "fs";
+import { pipeline } from "stream";
 
 import { writeFile } from "fs/promises";
 import { getPathFromFiles } from "./../utils/getPathFromFiles.js";
@@ -10,13 +12,14 @@ import { errOperation } from "./../utils/showError.js";
 export const cat = async () => {
   const path = getPathFromFiles(import.meta.url, "content.txt");
 
-  try {
-    const data = await readFile(path, "utf8");
-    console.log(data);
-  } catch (err) {
-    console.error(errOperation);
-    process.exitCode = 1;
-  }
+  const readableStream = createReadStream(path, "utf8");
+
+  pipeline(readableStream, process.stdout, (err) => {
+    if (err) {
+      console.error(errOperation);
+      process.exitCode = 1;
+    }
+  });
 };
 
 export const add = async () => {
