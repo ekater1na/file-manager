@@ -69,4 +69,5 @@ rl.on("line", async (command) => {
     default:
       process.stdout.write(`${errInput}\n`);
   }
-});
+}).on("SIGINT", () => rl.close());
+rl.on("close", () => doExit());
