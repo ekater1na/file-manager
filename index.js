@@ -1,22 +1,75 @@
-import { getHomeDir } from './utils/getHomeDir.mjs';
-import { getUserName } from './utils/getUserName.js';
+import * as readline from "readline";
 
-// const getHomeDir = getHomeDir();
-// const username = getUserName();
+import { cat, add, rn, cp, mv, rm } from "./src/operation.js";
+import { hash } from "./src/hash.js";
+import { getOs } from "./src/os.js";
 
-process.stdout.write(`Welcome to the File Manager, ${getUserName()}!\n`)
-process.stdout.write(`You are currently in ${getHomeDir()}, enter your command:\n`)
+import { goUp, goDown } from "./src/navigation.js";
+import { list } from "./src/list.js";
 
+import { exit as doExit } from "./src/exit.js";
 
-// import * as readline from 'readline';
-// const rl = readline.createInterface({
-//     input: process.stdin,
-//     output: process.stdout
-//   });
-  
-//   rl.question('What is your name? ', (answer) => {
-//     // TODO: Log the answer in a database
-//     console.log(`Hello: ${answer}`);
-  
-//     rl.close();
-//   });
+import { getDir } from "./utils/getDir.js";
+import { getUserName as username } from "./utils/getUserName.js";
+import { errInput } from "./utils/showError.js";
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
+
+process.stdout.write(`Welcome to the File Manager, ${username()}!\n`);
+
+rl.question(
+  `You are currently in ${getDir()}, enter your command:\n`,
+  (command) => {
+    switch (command) {
+      case "up":
+        goUp();
+        break;
+      case "cd":
+        goDown();
+        break;
+      case "ls":
+        list();
+        rl.write();
+        break;
+      case "cat":
+        cat();
+        break;
+      case "add":
+        add();
+        break;
+      case "rn":
+        rn();
+        break;
+      case "cp":
+        cp();
+        break;
+      case "mv":
+        mv();
+        break;
+      case "rm":
+        rm();
+        break;
+      case "hash":
+        hash();
+        break;
+      case "os":
+        getOs();
+        break;
+      case "compress":
+        compress();
+        break;
+      case "decompress":
+        decompress();
+        break;
+      case ".exit":
+        doExit();
+        rl.close();
+        break;
+      default:
+        process.stdout.write(`${errInput}\n`);
+    }
+  }
+);

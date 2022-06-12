@@ -1,5 +1,5 @@
-export const getUserName = () => {
-  return process.argv.slice(2);
-};
+import process from "process";
 
-getUserName();
+export const getUserName = () => {
+return  process.argv[2].slice(11);
+};
