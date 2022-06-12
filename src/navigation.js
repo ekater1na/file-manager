@@ -1,7 +1,5 @@
 import process from "process";
-
-import { readdir } from "fs/promises";
-import { getDir } from "./../utils/getDir.js";
+import { errOperation } from "./../utils/showError.js";
 
 export const goUp = async () => {
   try {
@@ -9,7 +7,7 @@ export const goUp = async () => {
     process.chdir("..");
     console.log("You are currently in " + process.cwd());
   } catch (err) {
-    throw new Error(err);
+    throw new Error(errOperation);
   }
 };
 
@@ -19,6 +17,6 @@ export const goDown = async () => {
     process.chdir("src");
     console.log("You are currently in " + process.cwd());
   } catch (err) {
-    throw new Error(err);
+    throw new Error(errOperation);
   }
 };

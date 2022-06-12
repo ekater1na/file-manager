@@ -19,57 +19,54 @@ const rl = readline.createInterface({
 });
 
 process.stdout.write(`Welcome to the File Manager, ${username()}!\n`);
+process.stdout.write(`You are currently in ${getDir()}, enter your command:\n`);
 
-rl.question(
-  `You are currently in ${getDir()}, enter your command:\n`,
-  (command) => {
-    switch (command) {
-      case "up":
-        goUp();
-        break;
-      case "cd":
-        goDown();
-        break;
-      case "ls":
-        list();
-        rl.write();
-        break;
-      case "cat":
-        cat();
-        break;
-      case "add":
-        add();
-        break;
-      case "rn":
-        rn();
-        break;
-      case "cp":
-        cp();
-        break;
-      case "mv":
-        mv();
-        break;
-      case "rm":
-        rm();
-        break;
-      case "hash":
-        hash();
-        break;
-      case "os":
-        getOs();
-        break;
-      case "compress":
-        compress();
-        break;
-      case "decompress":
-        decompress();
-        break;
-      case ".exit":
-        doExit();
-        rl.close();
-        break;
-      default:
-        process.stdout.write(`${errInput}\n`);
-    }
+rl.on("line", async (command) => {
+  switch (command) {
+    case "up":
+      goUp();
+      break;
+    case "cd":
+      goDown();
+      break;
+    case "ls":
+      list();
+      break;
+    case "cat":
+      cat();
+      break;
+    case "add":
+      add();
+      break;
+    case "rn":
+      rn();
+      break;
+    case "cp":
+      cp();
+      break;
+    case "mv":
+      mv();
+      break;
+    case "rm":
+      rm();
+      break;
+    case "hash":
+      hash();
+      break;
+    case "os":
+      getOs();
+      break;
+    case "compress":
+      compress();
+      break;
+    case "decompress":
+      decompress();
+      break;
+    case ".exit":
+      doExit();
+      rl.close();
+      break;
+    default:
+      process.stdout.write(`${errInput}\n`);
   }
-);
+});
