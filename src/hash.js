@@ -1,15 +1,23 @@
 import crypto from "crypto";
-import { readFile } from "fs/promises";
-import { getPathFromFiles } from "./../utils/getPathFromFiles.js";
-import { errOperation } from "./../utils/showError.js";
+import { existsSync, createReadStream } from "fs";
 
-export const hash = () => {
-  const path = getPathFromFiles(import.meta.url, "fileToCalculateHashFor.txt");
+import { getPathFromFiles } from "./../utils/getPathFromFiles.js";
+import { errInput, errOperation } from "./../utils/showError.js";
+
+export const hash = (file) => {
+  const path = getPathFromFiles(import.meta.url, file);
 
   try {
-    const data = readFile(path, "utf8");
-    const hash = crypto.createHash("sha256").update(data).digest("hex");
-    console.log(hash);
+    if (existsSync(path)) {
+      const src = createReadStream(path, "utf8");
+      const hash = crypto
+        .createHash("sha256")
+        .update(src.toString())
+        .digest("hex");
+      console.log(hash);
+    } else {
+      console.error(errInput);
+    }
   } catch (err) {
     console.error(errOperation);
     process.exitCode = 1;

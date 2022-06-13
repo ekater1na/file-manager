@@ -1,19 +1,18 @@
-import { createUnzip } from "node:zlib";
 import { createReadStream, createWriteStream } from "node:fs";
 import { getPathFromFiles } from "./../utils/getPathFromFiles.js";
 import  zlib   from "zlib";
 import { pipeline } from "node:stream";
 import { errOperation } from "./../utils/showError.js";
 
-export const compress = async () => {
-  const sourcePath = getPathFromFiles(import.meta.url, "fileToCompress.txt");
-  const destinationPath = getPathFromFiles(import.meta.url, "archive.br");
+export const compress = async (path, destination) => {
+  const sourcePath = getPathFromFiles(import.meta.url, path);
+  const destinationPath = getPathFromFiles(import.meta.url, destination);
 
   const brotli = zlib.createBrotliCompress();
   const source = createReadStream(sourcePath);
-  const destination = createWriteStream(destinationPath);
+  const dest = createWriteStream(destinationPath);
 
-  pipeline(source, brotli, destination, (err) => {
+  pipeline(source, brotli, dest, (err) => {
     if (err) {
       console.error(errOperation);
       process.exitCode = 1;
@@ -21,20 +20,20 @@ export const compress = async () => {
   });
 };
 
-export const decompress = async () => {
+export const decompress = async (path, destination) => {
   
-  const sourcePath = getPathFromFiles(import.meta.url, "archive.br");
+  const sourcePath = getPathFromFiles(import.meta.url, path);
   const destinationPath = getPathFromFiles(
     import.meta.url,
-    "fileToCompress.txt"
+    destination
   );
 
   const brotli = zlib.createBrotliDecompress();
   const source = createReadStream(sourcePath);
-  const destination = createWriteStream(destinationPath);
+  const dest = createWriteStream(destinationPath);
 
   
-  pipeline(source, brotli, destination, (err) => {
+  pipeline(source, brotli, dest, (err) => {
     if (err) {
       console.error(errOperation);
       process.exitCode = 1;

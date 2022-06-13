@@ -7,16 +7,18 @@ export const goUp = async () => {
     process.chdir("..");
     console.log("You are currently in " + process.cwd());
   } catch (err) {
-    throw new Error(errOperation);
+    console.error(errOperation);
+    process.exitCode = 1;
   }
 };
 
-export const goDown = async () => {
+export const goDown = async (path) => {
   try {
     console.log("You are currently in " + process.cwd());
-    process.chdir("src");
+    process.chdir(path);
     console.log("You are currently in " + process.cwd());
   } catch (err) {
-    throw new Error(errOperation);
+    console.error(errOperation);
+    process.exitCode = 1;
   }
 };

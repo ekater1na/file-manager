@@ -132,8 +132,7 @@ List of operations and their syntax:
 
 
 - General
-    -**+6** Application accepts username and prints proper message
-    
+    -**+6** Application accepts username and prints proper message    
     -**+10** Application exits if user pressed `ctrl+c` or sent `.exit` command and proper message is printed
 
 
@@ -197,36 +196,35 @@ List of operations and their syntax:
 
 ### Max Score: 320
 
-### Score: 243
-В приложении не реализован прием параметров после команды (выбор файла, директория и т.д.). В функциях, где нужно работать с файлами, файл для проверки работоспособности будет указан. Комментарии об этом есть ниже.
+### Score: 320
 
 -------------------------
 - General -  **16**
  -------------------------
-    -**+6** Application accepts username and prints proper message - костыли, но работает
+    -**+6** Application accepts username and prints proper message
     -**+10** Application exits if user pressed `ctrl+c` or sent `.exit` command and proper message is printed
 -------------------------
-- Operations fail - **30** - все ошибки, которые мне встречались, были обработаны
+- Operations fail - **30**
 -------------------------
     - **+20** Attempts to perform an operation on a non-existent file or work on a non-existent path result in the operation fail
     - **+10** Operation fail doesn't crash application
 -------------------------
-- Navigation & working directory operations implemented properly - **28**
+- Navigation & working directory operations implemented properly - **30**
 -------------------------
     - **+10** Go upper from current directory
-    - **10/8** Go to dedicated folder from current directory - не реализован прием параметра (выбор файла), сделан переход в захардкоженную src
+    - **+10** Go to dedicated folder from current directory
     - **+10** List all files and folders in current directory
 -------------------------
-- Basic operations with files implemented properly - **40** - не реализован прием параметра (выбор файла), работает по указанному пути. Штраф на твое усмотрение.
+- Basic operations with files implemented properly - **60**
 -------------------------
     - **+10** Read file and print it's content in console
     - **+10** Create empty file
     - **+10** Rename file
-    - **+10/0** Copy file
-    - **+10/0** Move file
+    - **+10** Copy file
+    - **+10** Move file
     - **+10** Delete file   
 -------------------------
-- Operating system info (prints following information in console) implemented properly - **34** - вся информация будет показана по команде os, прием параметров не реализован. Штраф на твое усмотрение.
+- Operating system info (prints following information in console) implemented properly - **34**
 -------------------------
     - **+6** Get EOL (default system End-Of-Line)
     - **+10** Get host machine CPUs info (overall amount of CPUS plus model and clock rate (in GHz) for each of them)
@@ -234,22 +232,22 @@ List of operations and their syntax:
     - **+6** Get current *system user name* (Do not confuse with the username that is set when the application starts)
     - **+6** Get CPU architecture for which Node.js binary has compiled   
 -------------------------
-- Hash calculation implemented properly - **15** - хэширование реализовано, кажется, не работает. Не успела найти, что там не так, но, думаю, там нужны небольшие парвки.
+- Hash calculation implemented properly - **20**
 -------------------------
     - **+20** Calculate hash for file   
 -------------------------
-- Compress and decompress operations - **20** - модуль также работает без приема параметров, проверить можно на примере указанных файлов. Штраф на твое усмотрение.
+- Compress and decompress operations - **40**
 -------------------------
     - **+20** Compress file (using Brotli algorithm)
     - **+20** Decompress file (using Brotli algorithm) 
 
-### Advanced Scope - **60**
+### Advanced Scope - **90**
 
-- **+50/20** All files operations with reading/writing should be performed using Streams API
+- **+50** All files operations with reading/writing should be performed using Streams API
 - **+20** Codebase is written in ESM modules instead of CommonJS
 - **+20** Codebase is separated (at least 7 modules)
 -------------------------
-### Forfeits - **0** - после дедлайна будет обновлен Readme.md. За это в школе штраф не дается.
+### Forfeits 
 
 - **-95% of total task score** Any external tools/libraries are used
 - **-30% of total task score** Commits after deadline (except commits that affect only `Readme.md`, `.gitignore`, etc.)

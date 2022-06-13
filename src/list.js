@@ -10,6 +10,7 @@ export const list = async () => {
     const files = await readdir(path);
     files.forEach((item) => console.log(item));
   } catch (err) {
-    throw new Error(errOperation);
+    console.error(errOperation);
+    process.exitCode = 1;
   }
 };

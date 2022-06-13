@@ -23,45 +23,47 @@ process.stdout.write(`Welcome to the File Manager, ${username()}!\n`);
 process.stdout.write(`You are currently in ${getDir()}, enter your command:\n`);
 
 rl.on("line", async (command) => {
+  const parameter = command.toString().trim().split(' ');
+
   switch (command) {
     case "up":
       goUp();
       break;
-    case "cd":
-      goDown();
+    case `cd ${parameter[1]}`:
+      goDown(parameter[1]);
       break;
     case "ls":
       list();
       break;
-    case "cat":
-      cat();
+    case `cat ${parameter[1]}`:
+      cat(parameter[1]);
       break;
-    case "add":
-      add();
+    case `add ${parameter[1]}`:
+      add(parameter[1]);
       break;
-    case "rn":
-      rn();
+    case `rn ${parameter[1]} ${parameter[2]}`:
+      rn(parameter[1], parameter[2]);
       break;
-    case "cp":
-      cp();
+    case `cp ${parameter[1]} ${parameter[2]}`:
+      cp(parameter[1], parameter[2]);
       break;
-    case "mv":
-      mv();
+    case `mv ${parameter[1]} ${parameter[2]}`:
+      mv(parameter[1], parameter[2]);
       break;
-    case "rm":
-      remove();
+    case `rm ${parameter[1]}`:
+      remove(parameter[1]);
       break;
-    case "hash":
-      hash();
+    case `hash ${parameter[1]}`:
+      hash(parameter[1]);
       break;
-    case "os":
-      getOs();
+    case `os ${parameter[1]}`:
+      getOs(parameter[1]);
       break;
-    case "compress":
-      compress();
+    case `compress ${parameter[1]} ${parameter[2]}`:
+      compress(parameter[1], parameter[2]);
       break;
-    case "decompress":
-      decompress();
+    case `decompress ${parameter[1]} ${parameter[2]}`:
+      decompress(parameter[1], parameter[2]);
       break;
     case ".exit":
       doExit();
